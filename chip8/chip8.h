@@ -72,6 +72,7 @@ public:
         ram = nullptr;
         memset( stack, 0, sizeof( stack ) );
         memset( &r, 0, sizeof( r ) );
+        memset( &screen, 0, sizeof( screen ) );
     }
 
     ~Chip8( void )
@@ -95,6 +96,7 @@ public:
             memset( screen, 0, sizeof( screen ) );
             r.PC = 0x200;
             r.SP = -1;
+            dbg.bps.clear();
             return true;
         }
 
