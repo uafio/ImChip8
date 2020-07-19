@@ -1,0 +1,11 @@
+
+.vs/chip8/v15/.suo
+*.db
+*.opendb
+*.ipch
+*.log
+*.tlog
+*.obj
+*.pdb
+*.iobj
+*.ipdb
