@@ -47,7 +47,7 @@ private:
             uint8_t scol = col;
 
             for ( int bitn = 7; bitn >= 0; bitn-- ) {
-                uint8_t* display = &screen[row + i][scol % _countof( screen[0] )];
+                uint8_t* display = &screen[(row + i) % _countof( screen )][scol % _countof( screen[0] )];
 
                 uint8_t bit = ( byte >> bitn ) & 1;
                 if ( bit && *display ) {
