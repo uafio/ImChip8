@@ -7,10 +7,13 @@
 #ifdef _WIN32
 #include <Windows.h>
 #include <commdlg.h>
+#elif __gnu_linux__
+#include <byteswap.h>
 #endif
 
 #include "imgui/imgui.h"
 #include "glfw3.h"
+#include "chip8defs.h"
 
 #include "chip8.h"
 
@@ -61,8 +64,14 @@ void Chip8Emu( GLFWwindow* window )
                 if ( GetOpenFileNameA( &ofile ) ) {
                     chip8->load( get_file_content( fpath ) );
                 }
-#elif _LINUX
-
+#elif __gnu_linux__
+                char fpath[1024];
+                FILE* hFile = popen( "zenity --file-selection", "r" );
+                fgets( fpath, sizeof( fpath ), hFile );
+                if ( fpath[strlen( fpath ) - 1] == '\n' ) {
+                    fpath[strlen( fpath ) - 1] = 0;
+                }
+                chip8->load( get_file_content( fpath ) );
 #endif
 
             } else if ( ImGui::MenuItem( "Exit" ) ) {

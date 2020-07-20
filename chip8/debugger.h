@@ -27,7 +27,7 @@ private:
 
             char label[6];
             snprintf( label, sizeof( label ), "##V%X", i );
-            ImGui::Text( &label[2] );
+            ImGui::Text( "%s", &label[2] );
             ImGui::SameLine();
             ImGui::InputScalar( label, ImGuiDataType_U8, &ctx->V[i], NULL, NULL, "%02X", ImGuiInputTextFlags_CharsHexadecimal );
             ImGui::SameLine();

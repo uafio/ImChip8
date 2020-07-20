@@ -48,7 +48,11 @@ static void glfw_error_callback( int error, const char* description )
     fprintf( stderr, "Glfw Error %d: %s\n", error, description );
 }
 
+#ifdef _WIN32
 int WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd )
+#elif __gnu_linux__
+int main( int argc, char** argv )
+#endif
 {
     // Setup window
     glfwSetErrorCallback( glfw_error_callback );

@@ -3,10 +3,10 @@
 #include <time.h>
 #include <algorithm>
 
+#include "chip8defs.h"
 #include "keypad.h"
 #include "config.h"
 #include "debugger.h"
-#include "chip8defs.h"
 
 uint8_t sprites[16][5] = {
     { 0xf0, 0x90, 0x90, 0x90, 0xf0 },

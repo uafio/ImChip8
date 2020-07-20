@@ -3,6 +3,7 @@
 #include <glfw3.h>
 #include <stdlib.h>
 #include "imgui/imgui.h"
+#include "chip8defs.h"
 
 /*        KEYPAD LAYOUT
  *   

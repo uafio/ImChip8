@@ -17,3 +17,10 @@ typedef struct _CTX {
     uint8_t DT;
     uint8_t ST;
 } CTX;
+
+#ifdef __gnu_linux__
+#define _countof( arr ) ( sizeof( arr ) / sizeof( ( arr )[0] ) )
+#define _byteswap_ushort bswap_16
+#define sprintf_s sprintf
+#define sscanf_s sscanf
+#endif
