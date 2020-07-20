@@ -11,7 +11,7 @@ MAIN     = chip8
 all:    $(MAIN)
 
 $(MAIN): $(OBJS)
-    $(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LIBS)
 
 clean:
-    $(RM) *.o $(MAIN)
+	$(RM) *.o $(MAIN)

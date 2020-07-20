@@ -25,7 +25,11 @@ You can download a pre-build binary from the [Releases](https://github.com/uafio
 * Don't forget to include [imgui.ini](https://github.com/uafio/ImChip8/releases/download/1/imgui.ini) in the same folder as the compiled executable to mimic the window layout in the preview.
 
 ## Linux
-TODO
+```sh
+sudo apt-get install libgl-dev libglew-dev libglfw-dev make g++
+cp ImChip8/x64/Release/imgui.ini ImChip8/chip8/linux
+cd ImChip8/chip8/linux && make
+```
 
 # Preview
 ## PONG
