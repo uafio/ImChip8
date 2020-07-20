@@ -40,8 +40,6 @@ private:
 
     void sprite2screen( uint8_t* data, uint8_t row, uint8_t col, uint8_t size )
     {
-        uint8_t srow = row;
-
         for ( int i = 0; i < size; i++ ) {
             uint8_t byte = data[i];
             uint8_t scol = col;
