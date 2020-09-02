@@ -246,6 +246,27 @@ private:
         ImGui::End();
     }
 
+    void show_stack( int8_t sp, uint16_t* stack )
+    {
+        ImGui::Begin( "Stack" );
+
+        ImGui::BeginTable( "stack", 2, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg );
+        ImGui::TableSetupColumn( "SP", 0, 0.2f );
+        ImGui::TableSetupColumn( "Address", 0 );
+        ImGui::TableAutoHeaders();
+
+        while ( sp >= 0 ) {
+            ImGui::TableNextRow();
+            ImGui::Text( "%02x", sp );
+            ImGui::TableNextCell();
+            ImGui::Text( "%04x", stack[sp--] );
+        }
+
+        ImGui::EndTable();
+
+        ImGui::End();
+    }
+
 public:
     std::vector< int > bps;
     bool run;
@@ -259,9 +280,10 @@ public:
         restart = false;
     }
 
-    void show( CTX* ctx, uint8_t* rom )
+    void show( CTX* ctx, uint8_t* rom, uint16_t* stack )
     {
         registers( ctx );
+        show_stack( ctx->SP, stack );
 
         if ( rom ) {
             mViewer.DrawWindow( "ROM", rom, 0x1000 );

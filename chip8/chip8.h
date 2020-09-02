@@ -72,6 +72,7 @@ public:
         memset( stack, 0, sizeof( stack ) );
         memset( &r, 0, sizeof( r ) );
         memset( &screen, 0, sizeof( screen ) );
+        r.SP = -1;
         romfile = nullptr;
     }
 
@@ -111,7 +112,7 @@ public:
 
     void debugger( void )
     {
-        dbg.show( &r, ram );
+        dbg.show( &r, ram, stack );
 
         if ( dbg.restart ) {
             dbg.run = false;
@@ -134,7 +135,9 @@ public:
                     memset( screen, 0, sizeof( screen ) );
                 } else if ( opcode == 0x00EE ) {
                     r.PC = stack[r.SP--];
-                    assert( r.SP >= -1 );
+                    if ( r.SP < -1 ) {
+                        dbg.run = false;
+                    }
                 } else {
                     LOG( "Invalid instruction %#x\n", opcode );
                     r.PC = NNN( opcode );
@@ -147,8 +150,10 @@ public:
 
             case 2:
                 stack[++r.SP] = r.PC;
-                assert( r.SP < _countof( stack ) );
                 r.PC = NNN( opcode );
+                if ( r.SP > _countof( stack ) ) {
+                    dbg.run = false;
+                }
                 break;
 
             case 3:
