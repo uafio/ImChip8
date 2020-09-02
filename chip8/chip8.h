@@ -27,7 +27,7 @@ uint8_t sprites[16][5] = {
     { 0xf0, 0x80, 0xf0, 0x80, 0x80 }
 };
 
-
+extern void* get_file_content( const char* fname );
 
 class Chip8
 {
@@ -61,6 +61,7 @@ private:
     }
 
 public:
+    char* romfile;
     KEYPAD keypad;
     CONFIG cfg;
 
@@ -71,6 +72,7 @@ public:
         memset( stack, 0, sizeof( stack ) );
         memset( &r, 0, sizeof( r ) );
         memset( &screen, 0, sizeof( screen ) );
+        romfile = nullptr;
     }
 
     ~Chip8( void )
@@ -78,6 +80,11 @@ public:
         if ( ram ) {
             free( ram );
             ram = nullptr;
+        }
+
+        if ( romfile ) {
+            free( romfile );
+            romfile = nullptr;
         }
     }
 
@@ -95,6 +102,7 @@ public:
             r.PC = 0x200;
             r.SP = -1;
             dbg.bps.clear();
+            dbg.restart = false;
             return true;
         }
 
@@ -104,6 +112,11 @@ public:
     void debugger( void )
     {
         dbg.show( &r, ram );
+
+        if ( dbg.restart ) {
+            dbg.run = false;
+            load( get_file_content( romfile ) );
+        }
     }
 
     void step( void )

@@ -73,6 +73,10 @@ private:
         if ( ImGui::Button( "Step" ) ) {
             step = true;
         }
+        ImGui::SameLine();
+        if ( ImGui::Button( "Restart" ) ) {
+            restart = true;
+        }
 
         ImGui::Unindent();
         ImGui::End();
@@ -246,11 +250,13 @@ public:
     std::vector< int > bps;
     bool run;
     bool step;
+    bool restart;
 
     Debugger( void )
     {
         run = false;
         step = false;
+        restart = false;
     }
 
     void show( CTX* ctx, uint8_t* rom )

@@ -62,6 +62,10 @@ void Chip8Emu( GLFWwindow* window )
                 ofile.nMaxFile = sizeof( fpath );
 
                 if ( GetOpenFileNameA( &ofile ) ) {
+                    if ( chip8->romfile ) {
+                        free( chip8->romfile );
+                    }
+                    chip8->romfile = _strdup( fpath );
                     chip8->load( get_file_content( fpath ) );
                 }
 #elif __gnu_linux__
@@ -71,6 +75,12 @@ void Chip8Emu( GLFWwindow* window )
                 if ( fpath[strlen( fpath ) - 1] == '\n' ) {
                     fpath[strlen( fpath ) - 1] = 0;
                 }
+
+                if ( chip8->romfile ) {
+                    free( chip8->romfile );
+                }
+                chip8->romfile = strdup( fpath );
+
                 chip8->load( get_file_content( fpath ) );
 #endif
 
