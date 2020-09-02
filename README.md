@@ -26,7 +26,7 @@ You can download a pre-build binary from the [Releases](https://github.com/uafio
 
 ## Linux
 ```sh
-sudo apt-get install libgl-dev libglew-dev libglfw-dev make g++
+sudo apt-get install libgl-dev libglew-dev libglfw3-dev make g++
 cp ImChip8/x64/Release/imgui.ini ImChip8/chip8/linux
 cd ImChip8/chip8/linux && make
 ```
