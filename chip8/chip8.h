@@ -40,6 +40,8 @@ private:
 
     void sprite2screen( uint8_t* data, uint8_t row, uint8_t col, uint8_t size )
     {
+        bool collision = false;
+
         for ( int i = 0; i < size; i++ ) {
             uint8_t byte = data[i];
             uint8_t scol = col;
@@ -47,17 +49,17 @@ private:
             for ( int bitn = 7; bitn >= 0; bitn-- ) {
                 uint8_t* display = &screen[(row + i) % _countof( screen )][scol % _countof( screen[0] )];
 
-                uint8_t bit = ( byte >> bitn ) & 1;
-                if ( bit && *display ) {
-                    r.V[0xf] = 1;
-                } else {
-                    r.V[0xf] = 0;
+                uint8_t pixel = ( byte >> bitn ) & 1;
+                if ( pixel && *display ) {
+                    collision = true;
                 }
 
-                *display ^= bit;
+                *display ^= pixel;
                 scol++;
             }
         }
+
+        r.V[0xf] = collision;
     }
 
 public:
