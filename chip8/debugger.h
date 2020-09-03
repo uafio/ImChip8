@@ -215,7 +215,9 @@ private:
         ImGui::Begin( "Disassembler" );
 
         char opsz[32];
-        for ( int addr = 0x200; addr < 0x1000; addr = addr + 2 ) {
+        int addr = r->PC % 2 ? 0x201 : 0x200;
+
+        for ( ; addr < 0x1000; addr = addr + 2 ) {
             memset( opsz, 0, sizeof( opsz ) );
             uint16_t op = _byteswap_ushort( *reinterpret_cast< uint16_t* >( &rom[addr] ) );
             if ( !op || !disass( r, op, opsz, sizeof( opsz ) ) ) {
