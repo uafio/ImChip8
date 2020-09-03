@@ -39,6 +39,7 @@ cd ImChip8/chip8/linux && make
 * Added a new `Stack view` window to show stack content
 * Changed layout. `Config` is now tabbed next to `Registers`
 * Replaced asserts with logic to pause execution
+* Changed disassembly to support odd number addressing
 
 ### Screenshot
 ![ImGhip8v1.1](sample/ImChip8_v1.1.PNG)
