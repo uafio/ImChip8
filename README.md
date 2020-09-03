@@ -32,8 +32,18 @@ cd ImChip8/chip8/linux && make
 ```
 
 # Preview
-## PONG
+## ImChip8 v1.1
+### Release notes
+* Fixed a collision bug
+* Added a `Restart` feature
+* Added a new `Stack view` window to show stack content
+* Changed layout. `Config` is now tabbed next to `Registers`
+* Replaced asserts with logic to pause execution
+
+### Screenshot
+![ImGhip8v1.1](sample/ImChip8_v1.1.PNG)
+
+## ImChip8 v1.0
 ![PONG](sample/ImChip8PreviewPong.gif)
 
-## Demo
 ![DEMO](sample/ImChip8PreviewDemo.gif)
